@@ -22,7 +22,7 @@ export const MovieView = ({ movie, onBackClick }) => {
         </div>
         <div>
           <span>Featured: </span>
-          <span>{movie.featured}</span>
+          <span>{movie.featured ? "True" : "False"}</span>
         </div>
         <button onClick={onBackClick}>Back</button>{" "}
       </div>
