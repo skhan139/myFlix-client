@@ -1,12 +1,19 @@
-import { createRoot } from "react-dom/client";
- import { MainView } from "./components/main-view/main-view";
- import "./index.scss";
+import { createRoot } from 'react-dom/client';
+import { MainView } from "./components/main-view/main-view";
+import "./index.scss";
+import { Container } from "react-bootstrap";
 
- const App = () => {
-   return <MainView />;
+ // Main component (will eventually use all the others)
+ const MyMovieApplication = () => {
+     return (
+     <Container>
+         <MainView />
+     </Container>
+     )
  };
 
- const container = document.querySelector("#root");
- const root = createRoot(container);
-
- root.render(<App />);
+ // Finds the root of the app
+const container = document.querySelector("#root");
+const root = createRoot(container);
+// Tells React to render the app in the root DOM element
+root.render(<MyMovieApplication />);
