@@ -1,5 +1,91 @@
-$color: steelblue;
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Permanent+Marker&family=Roboto:wght@500&display=swap');
+ $body-bg: #01121b;
+ $primary: #132d97;
+ $body-color: #eaf2ef;
 
-.my-flix {
-  color: $color;
+ @import '~bootstrap/scss/bootstrap.scss';
+
+ body {
+   font-family: 'Roboto', sans-serif;
+ }
+
+ img {
+   width: 100%;
+   box-sizing: border-box;
+ }
+
+ h1,
+ h2 {
+   color: $primary;
+ }
+
+ .login-signup--page {
+   position: absolute;
+   top: 50%;
+   transform: translate(0, -50%);
+ }
+
+ .logo {
+   font-family: 'Permanent Marker', cursive;
+   font-size: 90px;
+   margin: 0 auto;
+   color: $primary;
+   text-align: center;
+ }
+
+ .login--form,
+ .signup--form {
+   margin: 0 auto;
+   display: flex;
+   flex-direction: column;
+   align-content: center;
+  gap: 10px;
 }
+.login--form input,
+.login--form button,
+.signup--form input,
+.signup--form button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+ .login--form label,
+ .signup--form label {
+   color: $body-color;
+ }
+
+ .hide--signup-or-login {
+   display: none;
+ }
+
+ .movie-card--button {
+   position: absolute;
+   margin: 10px 10px;
+ }
+
+ .movie-card:hover {
+   background: rgba(0, 0, 0, 0.1);
+   box-shadow: 1px 1px 10px #000;
+ }
+
+ .home-page--main {
+   margin: 20px 5px;
+ }
+
+ .one-movie--view {
+   background-color: rgba(0, 0, 0, 0.3);
+   box-shadow: 1px 3px 10px #000;
+   box-sizing: border-box;
+   margin: 20px 0;
+
+   .col-md-6:first-child {
+     padding-left: 0;
+     padding-right: 0;
+   }
+
+   .col-md-6:last-child {
+     padding-top: 10px;
+     padding-bottom: 10px;
+   }
+ }

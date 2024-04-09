@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Button from 'react-bootstrap/Button';
+ import Row from 'react-bootstrap/Row';
+ import Col from 'react-bootstrap/Col';
 
  export const LoginView = ({ onLoggedIn }) => {
    const [username, setUsername] = useState("");
@@ -37,26 +40,46 @@ import { useState } from "react";
      }
 
    return (
-     <form onSubmit={handleSubmit}>
-       <label>
-         Username:
-         <input
-           type="text"
-           value={username}
-           onChange={(e) => setUsername(e.target.value)}
-           required
-         />
-       </label>
-       <label>
-         Password:
-         <input
-           type="password"
-           value={password}
-           onChange={(e) => setPassword(e.target.value)}
-           required
-         />
-       </label>
-       <button type="submit">Submit</button>
-     </form>
+    <Row className="justify-content-center">
+    <Col md={4} className="login-signup--page">
+      <div className="logo">myFLIX</div>
+      <form className="login--form" onSubmit={handleSubmit}>
+        <label>
+          Username:
+          <br />
+          <input
+            className="form-input"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Password:
+          <br />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </label>
+        <Button type="submit">Submit</Button>
+        <Button
+          className="signup--button"
+          variant="outline-primary"
+          onClick={() => {
+            let loginView = document.querySelector('.login--view');
+            loginView.classList.add('hide--signup-or-login');
+            let signupView = document.querySelector('.signup--view');
+            signupView.classList.remove('hide--signup-or-login');
+          }}
+        >
+          Signup
+        </Button>
+      </form>
+    </Col>
+  </Row>
    );
  }
