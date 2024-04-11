@@ -8,18 +8,18 @@ export const MovieCard = ({ movie, onMovieClick }) => {
         onMovieClick(movie);
       }}
     >
-      <Card.Img variant="top" src={movie.image} alt={movie.title} />
+      <Card.Img variant="top" src={movie.image} alt={movie.Title} />
       <Card.Body>
         <Card.Title className="movie-title">
-          <span className="titleText">{movie.title}</span>
-         </Card.Title>
-         <Card.Text>{movie.description.slice(0, 50)}...</Card.Text>
-       </Card.Body>
-       <Button variant="primary" className="movie-card--button">
-         View
-       </Button>
-     </Card>
-   );
+          <span className="titleText">{movie.Title}</span>
+        </Card.Title>
+        <Card.Text>{movie.Description.slice(0, 50)}...</Card.Text>
+      </Card.Body>
+      <Button variant="primary" className="movie-card--button">
+        View
+      </Button>
+    </Card>
+  );
  };
 MovieCard.propTypes = {
   movie: PropTypes.shape({
