@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import PropTypes from "prop-types";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
+import { useParams } from "react-router";
+ import { Link } from "react-router-dom";
 
-export const MovieView = ({ movie, onBackClick, token }) => {
+ export const MovieView = ({ movies }) => {
+   const { movieId } = useParams();
+
+   const movie = movies.find((m) => m.id === movieId);
   return (
     <div className="one-movie--main">
       <Row className="justify-content-center">
@@ -36,20 +35,9 @@ export const MovieView = ({ movie, onBackClick, token }) => {
                 <h2>Director</h2>
                 <span>{movie.Director.Name}</span>
               </div>
-              {/* <div className="movie-view-text--actors">
-                <h2>Actors</h2>
-                <span>
-                  {selectedMovie.actors
-                    ? selectedMovie.actors.map((name) => (
-                        <div key={name}>{name}</div>
-                      ))
-                    : null}
-                </span>
-              </div>
-              <br /> */}
-              <Button variant="outline-primary" onClick={onBackClick}>
-                Back to Menu
-              </Button>
+              <Link to={`/`}>
+         <button className="back-button">Back</button>
+       </Link>
             </Col>
           </Row>
         </Col>

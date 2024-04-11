@@ -1,85 +1,70 @@
+import React from "react";
 import { useState } from "react";
-import Button from 'react-bootstrap/Button';
- import Row from 'react-bootstrap/Row';
- import Col from 'react-bootstrap/Col';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
- export const LoginView = ({ onLoggedIn }) => {
-   const [username, setUsername] = useState("");
-   const [password, setPassword] = useState("");
+export const LoginView = ({onLoggedIn}) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword]= useState("");
+    const handleSubmit = (event) => {
+      event.preventDefault();
+  
+      const data = {
+        username: username,
+        password: password
+      };
+  
 
-   const handleSubmit = (event) => {
-     // this prevents the default behavior of the form which is to reload the entire page
-     event.preventDefault();
-
-     const data = {
-         Username: username,
-         Password: password
-       };
-
-       fetch("https://movieapicf-30767e813dee.herokuapp.com/login", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json"
-         },
-         body: JSON.stringify(data)
-       })
-         .then((response) => response.json())
-         .then((data) => {
-           console.log("Login response: ", data);
-           if (data.user) {
-             localStorage.setItem("user", JSON.stringify(data.user));
-             localStorage.setItem("token", data.token);
-             onLoggedIn(data.user, data.token);
-           } else {
-             alert("No such user");
-           }
-         })
-         .catch((e) => {
-           alert("Something went wrong");
-         });
-     }
-
-   return (
-    <Row className="justify-content-center">
-    <Col md={4} className="login-signup--page">
-      <div className="logo">myFLIX</div>
-      <form className="login--form" onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <br />
-          <input
-            className="form-input"
+    fetch("https://movieapicf-30767e813dee.herokuapp.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then((response) => response.json())
+    .then((data) => {
+      console.log("Login response: ", data);
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("token", data.token);
+        onLoggedIn(data.user, data.token);
+      } else {
+        alert("No such user");
+      }
+    })
+    .catch((e) => {
+        console.error("Login error: ", e);
+      alert("Something went wrong");
+    });
+}
+   
+    return (
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            minLength="3" 
+            className="mb-4"
           />
-        </label>
-        <label>
-          Password:
-          <br />
-          <input
+        </Form.Group>
+  
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="mb-4"
             required
           />
-        </label>
-        <Button type="submit">Submit</Button>
-        <Button
-          className="signup--button"
-          variant="outline-primary"
-          onClick={() => {
-            let loginView = document.querySelector('.login--view');
-            loginView.classList.add('hide--signup-or-login');
-            let signupView = document.querySelector('.signup--view');
-            signupView.classList.remove('hide--signup-or-login');
-          }}
-        >
-          Signup
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
         </Button>
-      </form>
-    </Col>
-  </Row>
-   );
- }
+      </Form>
+    );
+  };
