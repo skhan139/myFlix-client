@@ -27,23 +27,24 @@ export const MainView = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Movies data: ", data);
-        const moviesFromApi = data.map((data) => {
-           return {
-             _id: movie._id,
-             Title: movie.Title,
-             Description: movie.Description,
-             Actors: movie.actors,
-             image: movie.imagePath,
-             url: movie.url,
-             featured: movie.featured,
-             Genre: {
-                 Name: movie.Genre.Name
-             },
-             Director: {
-                 Name: movie.Director.Name
-             }
-           };
-         });
+        const moviesFromApi = data.map((movie) => {
+          return {
+            _id: movie._id,
+            Title: movie.Title,
+            Description: movie.Description,
+            Actors: movie.Actors, // Ensure consistency in property names
+            image: movie.image,
+            url: movie.url,
+            featured: movie.featured,
+            Genre: {
+              Name: movie.Genre.Name,
+            },
+            Director: {
+              Name: movie.Director.Name,
+            },
+          };
+        });
+        
 
          setMovies(moviesFromApi);
        });
@@ -127,9 +128,9 @@ export const MainView = () => {
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie.id} md={3} sm={12}>
-                        <MovieCard 
-                        movie={movie} 
-                        isFavorite={user.favoriteMovies.includes(movie.title)}
+                        <MovieCard
+                          movie={movie}
+                          isFavorite={user.FavoriteMovies.includes(movie.title)}
                         />
                       </Col>
                     ))}

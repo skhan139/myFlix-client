@@ -1,5 +1,6 @@
 import { useParams } from "react-router";
  import { Link } from "react-router-dom";
+ import PropTypes from "prop-types";
 
  export const MovieView = ({ movies }) => {
    const { movieId } = useParams();

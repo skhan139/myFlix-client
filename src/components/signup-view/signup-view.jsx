@@ -12,10 +12,10 @@ export const SignupView = () => {
         event.preventDefault();
 
     const data = {
-      username: username,
-      password: password,
-      email: email,
-      birthDate: birthday
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
     };
 
     fetch('https://movieapicf-30767e813dee.herokuapp.com/movies', {

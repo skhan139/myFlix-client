@@ -9,9 +9,9 @@ export const LoginView = ({onLoggedIn}) => {
     const handleSubmit = (event) => {
       event.preventDefault();
   
-      const data = {
-        username: username,
-        password: password
+       const data = {
+        Username: username,
+        Password: password,
       };
   
 
