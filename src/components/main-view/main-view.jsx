@@ -50,16 +50,7 @@ export const MainView = () => {
        });
       }, [token]);
 
-      let similarMovies;
-  if (selectedMovie) {
-    similarMovies = movies
-      .filter((movie) => {
-        return (
-          movie.genre.includes(selectedMovie.genre) && movie !== selectedMovie
-        );
-      })
-      .map((filteredName) => filteredName);
-  }
+     
   return (
     <BrowserRouter>
       <NavigationBar
@@ -130,7 +121,7 @@ export const MainView = () => {
                       <Col className="mb-5" key={movie.id} md={3} sm={12}>
                         <MovieCard
                           movie={movie}
-                          isFavorite={user.FavoriteMovies.includes(movie.title)}
+                          isFavorite={user.FavoriteMovies.includes(movie.MovieID)}
                         />
                       </Col>
                     ))}

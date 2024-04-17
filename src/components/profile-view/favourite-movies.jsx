@@ -14,10 +14,10 @@ import React from 'react'
          {favoriteMovies.map((movie) => {
            return (
              <Col  className="mb-5" key={movie.id} md={4}>
-               <Link to={`/movies/${movie.title}`} />
+               <Link to={`/movies/${movie.MovieID}`} />
                <MovieCard
                  movie={movie}
-                 isFavorite={user.favoriteMovies.includes(movie.title)}
+                 isFavorite={user.favoriteMovies.includes(movie.MovieID)}
                />
              </Col>
            );

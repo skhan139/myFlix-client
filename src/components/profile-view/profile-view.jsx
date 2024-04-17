@@ -17,10 +17,10 @@ export const ProfileView = ({localUser, movies, token}) => {
     const favoriteMovies = user === undefined ? [] : movies.filter(m => user.favoriteMovies.includes(m.title))
 
     const formData = {
-        username: username,
-        email: email,
-        birthDate: birthDate,
-        password: password
+      Username: username,
+      Email: email,
+      BirthDate: birthDate,
+      Password: password,
       };
       const handleSubmit = (event) => {
         event.preventDefault(event);

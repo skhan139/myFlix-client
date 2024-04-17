@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import  Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
 import "./movie-card.scss";
 
 export const MovieCard = ({ movie, isFavorite }) => {
@@ -10,13 +12,13 @@ export const MovieCard = ({ movie, isFavorite }) => {
   const [user, setUser] = useState(storedUser? storedUser: null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
   
-  const [addTitle, setAddTitle] = useState("");
-  const [delTitle, setDelTitle] = useState("");
+  const [addMovieID, setAddMovieID] = useState("");
+  const [delMovieID, setDelMovieID] = useState("");
 
   useEffect(() => {
     const addToFavorites = () => {
       fetch(
-        `https://mj-movies-flix-036de76605bb.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie.title)}`,
+        `https://movieapicf-30767e813dee.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie.MovieID)}`,
         {
           method: "POST",
           headers: {
@@ -45,7 +47,7 @@ export const MovieCard = ({ movie, isFavorite }) => {
     };
     const removeFromFavorites = () => {
       fetch(
-        `https://mj-movies-flix-036de76605bb.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie.title)}`,
+        `https://movieapicf-30767e813dee.herokuapp.com/${user.username}/movies/${encodeURIComponent(movie.MovieID)}`,
         {
           method: "DELETE",
           headers: {
@@ -72,19 +74,19 @@ export const MovieCard = ({ movie, isFavorite }) => {
           console.error(error);
         });
     };
-    if (addTitle) {
+    if (addMovieID) {
       addToFavorites();
     }
-    if (delTitle) {
+    if (delMovieID) {
       removeFromFavorites();
     }
-  }, [addTitle, delTitle, token]);
+  }, [addMovieID, delMovieID, token]);
 
   const handleAddToFavorites = () => {
-    setAddTitle(movie.title);
+    setAddMovieID(movie.MovieID);
   };
   const handleRemoveFromFavorites = () => {
-    setDelTitle(movie.title);
+    setDelMovieID(movie.MovieID);
   }; 
 
   return (
