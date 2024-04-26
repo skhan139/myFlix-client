@@ -41977,14 +41977,14 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                     children: "MyFlix"
                 }, void 0, false, {
                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                    lineNumber: 12,
+                    lineNumber: 11,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Toggle, {
                     "aria-controls": "basic-navbar-nav"
                 }, void 0, false, {
                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                    lineNumber: 15,
+                    lineNumber: 14,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -42001,7 +42001,7 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                                             children: "Login"
                                         }, void 0, false, {
                                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 20,
+                                            lineNumber: 19,
                                             columnNumber: 17
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -42010,7 +42010,7 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                                             children: "Signup"
                                         }, void 0, false, {
                                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 23,
+                                            lineNumber: 22,
                                             columnNumber: 17
                                         }, undefined)
                                     ]
@@ -42023,7 +42023,7 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                                             children: "Movies"
                                         }, void 0, false, {
                                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 30,
+                                            lineNumber: 29,
                                             columnNumber: 17
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -42032,7 +42032,7 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                                             children: "Profile"
                                         }, void 0, false, {
                                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 33,
+                                            lineNumber: 32,
                                             columnNumber: 17
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
@@ -42040,7 +42040,7 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                                             children: "Logout"
                                         }, void 0, false, {
                                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 36,
+                                            lineNumber: 35,
                                             columnNumber: 17
                                         }, undefined)
                                     ]
@@ -42048,72 +42048,73 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                             ]
                         }, void 0, true, {
                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                            lineNumber: 17,
+                            lineNumber: 16,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                                 path: "/",
                                 element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Form), {
-                                    inline: "true",
+                                    inline: true,
                                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                             xs: "auto",
-                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _searchBar.SearchBar), {
+                                            children: handleSearch && query && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _searchBar.SearchBar), {
                                                 handleSearch: handleSearch,
                                                 query: query,
                                                 movies: movies
                                             }, void 0, false, {
                                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
                                                 lineNumber: 47,
-                                                columnNumber: 23
+                                                columnNumber: 25
                                             }, void 0)
                                         }, void 0, false, {
                                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                            lineNumber: 46,
+                                            lineNumber: 45,
                                             columnNumber: 21
                                         }, void 0)
                                     }, void 0, false, {
                                         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                        lineNumber: 45,
+                                        lineNumber: 44,
                                         columnNumber: 19
                                     }, void 0)
                                 }, void 0, false, {
                                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                    lineNumber: 44,
+                                    lineNumber: 43,
                                     columnNumber: 17
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                                lineNumber: 41,
+                                lineNumber: 40,
                                 columnNumber: 13
                             }, undefined)
                         }, void 0, false, {
                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                            lineNumber: 40,
+                            lineNumber: 39,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
-                    lineNumber: 16,
+                    lineNumber: 15,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/navigation-bar/navigation-bar.jsx",
-            lineNumber: 11,
+            lineNumber: 10,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/navigation-bar/navigation-bar.jsx",
-        lineNumber: 10,
+        lineNumber: 9,
         columnNumber: 5
     }, undefined);
 };
 _c = NavigationBar;
 NavigationBar.propTypes = {
     user: (0, _propTypesDefault.default).object,
+    handleSearch: (0, _propTypesDefault.default).func,
     query: (0, _propTypesDefault.default).string,
     onLoggedOut: (0, _propTypesDefault.default).func.isRequired
 };

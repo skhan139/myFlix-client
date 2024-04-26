@@ -1,7 +1,6 @@
 import { Navbar, Container, Nav, Row, Col, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { Link, Route, Routes } from "react-router-dom";
-
 import "./navigation-bar.scss";
 import { SearchBar } from "../search-bar/search-bar";
 
@@ -41,14 +40,16 @@ export const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut }
             <Route
               path="/"
               element={
-                <Form inline="true">
+                <Form inline={true}>
                   <Row>
                     <Col xs="auto">
-                      <SearchBar
-                        handleSearch={handleSearch}
-                        query={query}
-                        movies={movies}
-                      />
+                      {handleSearch && query && (
+                        <SearchBar
+                          handleSearch={handleSearch}
+                          query={query}
+                          movies={movies}
+                        />
+                      )}
                     </Col>
                   </Row>
                 </Form>
@@ -62,7 +63,8 @@ export const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut }
 };
 
 NavigationBar.propTypes = {
-  user: PropTypes.object, // Make user prop optional
+  user: PropTypes.object,
+  handleSearch: PropTypes.func, // Make handleSearch prop optional
   query: PropTypes.string, // Make query prop optional
   onLoggedOut: PropTypes.func.isRequired,
 };
