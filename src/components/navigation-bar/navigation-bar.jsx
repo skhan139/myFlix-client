@@ -40,7 +40,7 @@ export const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut }
             <Route
               path="/"
               element={
-                <Form inline={true}>
+                <Form>
                   <Row>
                     <Col xs="auto">
                       {handleSearch && query && (
