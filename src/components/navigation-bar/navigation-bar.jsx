@@ -10,7 +10,7 @@ export const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut }
     <Navbar bg="Turquoise" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
-        MyFlix
+          MyFlix
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -33,26 +33,27 @@ export const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut }
                 <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
-                <Nav.Link onClick={onLoggedOut} >Logout</Nav.Link>
+                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
           </Nav>
           <Routes>
             <Route
-            path="/"
-            element={
-              <Form inline="true">
+              path="/"
+              element={
+                <Form inline="true">
                   <Row>
                     <Col xs="auto">
-                    <SearchBar
-                     handleSearch={handleSearch}
-                     query={query}
-                     movies={movies} />
+                      <SearchBar
+                        handleSearch={handleSearch}
+                        query={query}
+                        movies={movies}
+                      />
                     </Col>
                   </Row>
-              </Form>
-            }
-          />
+                </Form>
+              }
+            />
           </Routes>
         </Navbar.Collapse>
       </Container>
@@ -61,7 +62,7 @@ export const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut }
 };
 
 NavigationBar.propTypes = {
-  user: PropTypes.object.isRequired,
-  query: PropTypes.string.isRequired,
-  onLoggedOut: PropTypes.func.isRequired
+  user: PropTypes.object, // Make user prop optional
+  query: PropTypes.string, // Make query prop optional
+  onLoggedOut: PropTypes.func.isRequired,
 };

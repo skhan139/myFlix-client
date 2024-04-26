@@ -37232,7 +37232,7 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                                             }, void 0, false, {
                                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
                                                 lineNumber: 47,
-                                                columnNumber: 21
+                                                columnNumber: 23
                                             }, void 0)
                                         }, void 0, false, {
                                             fileName: "src/components/navigation-bar/navigation-bar.jsx",
@@ -37247,7 +37247,7 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
                                 }, void 0, false, {
                                     fileName: "src/components/navigation-bar/navigation-bar.jsx",
                                     lineNumber: 44,
-                                    columnNumber: 15
+                                    columnNumber: 17
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/navigation-bar/navigation-bar.jsx",
@@ -37279,8 +37279,8 @@ const NavigationBar = ({ user, movies, handleSearch, query, onLoggedOut })=>{
 };
 _c = NavigationBar;
 NavigationBar.propTypes = {
-    user: (0, _propTypesDefault.default).object.isRequired,
-    query: (0, _propTypesDefault.default).string.isRequired,
+    user: (0, _propTypesDefault.default).object,
+    query: (0, _propTypesDefault.default).string,
     onLoggedOut: (0, _propTypesDefault.default).func.isRequired
 };
 var _c;
