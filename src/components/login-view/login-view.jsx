@@ -43,4 +43,5 @@ const LoginView = ({ onLoggedIn }) => {
     );
 };
 
-export default LoginView;
+export { LoginView };
+
