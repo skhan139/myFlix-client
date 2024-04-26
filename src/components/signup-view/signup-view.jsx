@@ -44,4 +44,4 @@ const SignupView = () => {
     );
 };
 
-export default SignupView;
+export { SignupView };
