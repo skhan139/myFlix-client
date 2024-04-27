@@ -1,9 +1,10 @@
+// MainView.jsx
 import { useEffect, useState } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import  Row from "react-bootstrap/Row";
+import Row from "react-bootstrap/Row";
 import Col from 'react-bootstrap/Col';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
@@ -12,9 +13,9 @@ import { ProfileView } from "../profile-view/profile-view";
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-  const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     if (!token) {
@@ -44,13 +45,11 @@ export const MainView = () => {
             },
           };
         });
-        
 
-         setMovies(moviesFromApi);
-       });
-      }, [token]);
+        setMovies(moviesFromApi);
+      });
+  }, [token]);
 
-     
   return (
     <BrowserRouter>
       <NavigationBar
@@ -85,7 +84,10 @@ export const MainView = () => {
                   <Navigate to="/" />
                 ) : (
                   <Col md={5}>
-                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                    <LoginView onLoggedIn={(user, token) => {
+                      setUser(user);
+                      setToken(token);
+                    }} />
                   </Col>
                 )}
               </>
@@ -152,4 +154,4 @@ export const MainView = () => {
       </Row>
     </BrowserRouter>
   );
-}
+};
