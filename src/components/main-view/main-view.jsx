@@ -117,9 +117,12 @@ import { ProfileView } from "../profile-view/profile-view";
                   <>
                     {movies.map((movie) => (
                       <Col className="mb-5" key={movie.id} md={3} sm={12}>
-                        <MovieCard
+                         <MovieCard
+                          setUser={setUser}
+                          token={token}
+                          user={user}
                           movie={movie}
-                          isFavorite={user.FavoriteMovies.includes(movie.MovieID)}
+                          isFavorite={user.FavoriteMovies.includes(movie._id)}
                         />
                       </Col>
                     ))}
