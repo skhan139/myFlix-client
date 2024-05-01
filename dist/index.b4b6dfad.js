@@ -27471,37 +27471,64 @@ var _rowDefault = parcelHelpers.interopDefault(_row);
 var _col = require("react-bootstrap/Col");
 var _colDefault = parcelHelpers.interopDefault(_col);
 var _movieCardScss = require("./movie-card.scss");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
-    console.log(user.FavoriteMovies.includes(movie._id));
-    console.log(user);
-    const addToFavorites = ()=>{
-        fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie._id)}`, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        }).then((response)=>{
-            console.log(response);
-            if (!response.ok) throw new Error("Failed to add movie to favorites.");
-            alert("Movie added to favorites successfully!");
-            const storedUser = JSON.parse(localStorage.getItem("user"));
-            // Update FavoriteMovies array
-            storedUser.FavoriteMovies.push(movie._id);
-            // Save updated user object back to localStorage
-            localStorage.setItem("user", JSON.stringify(storedUser));
-            setUser((prevUser)=>({
-                    ...prevUser,
-                    FavoriteMovies: [
-                        ...prevUser.FavoriteMovies,
-                        movie._id
-                    ]
-                }));
-        }).catch((error)=>{
-            console.error(error);
-        });
-    };
+var _s = $RefreshSig$();
+const MovieCard = ({ movie, isFavorite })=>{
+    _s();
+    const storedToken = localStorage.getItem("token");
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null);
+    const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
+    (0, _react.useEffect)(()=>{
+        const addToFavorites = ()=>{
+            if (!storedUser || !movie.MovieID) return;
+            fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${storedUser.username}/movies/${encodeURIComponent(movie.MovieID)}`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }).then((response)=>{
+                if (!response.ok) throw new Error("Failed to add movie to favorites.");
+                alert("Movie added to favorites successfully!");
+                setUser((prevUser)=>({
+                        ...prevUser,
+                        favorites: [
+                            ...prevUser.favorites,
+                            movie.MovieID
+                        ]
+                    }));
+            }).catch((error)=>{
+                console.error(error);
+            });
+        };
+        const removeFromFavorites = ()=>{
+            if (!storedUser || !movie.MovieID) return;
+            fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${storedUser.username}/movies/${encodeURIComponent(movie.MovieID)}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }).then((response)=>{
+                if (!response.ok) throw new Error("Failed to remove movie from favorites.");
+                alert("Movie removed from favorites successfully!");
+                setUser((prevUser)=>({
+                        ...prevUser,
+                        favorites: prevUser.favorites.filter((favMovieID)=>favMovieID !== movie.MovieID)
+                    }));
+            }).catch((error)=>{
+                console.error(error);
+            });
+        };
+        if (addMovieID) addToFavorites();
+        if (delMovieID) removeFromFavorites();
+    }, [
+        addMovieID,
+        delMovieID,
+        token,
+        storedUser,
+        movie.MovieID
+    ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27516,7 +27543,7 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                             className: "object-fit-cover"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 55,
+                            lineNumber: 88,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27525,31 +27552,31 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                                     children: movie.title
                                 }, void 0, false, {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 61,
+                                    lineNumber: 90,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                                     children: movie.genre
                                 }, void 0, false, {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 62,
+                                    lineNumber: 91,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 60,
+                            lineNumber: 89,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 54,
+                    lineNumber: 87,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 50,
+                lineNumber: 86,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
@@ -27559,25 +27586,26 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                     children: "Remove"
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 68,
+                    lineNumber: 97,
                     columnNumber: 11
                 }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                     variant: "primary",
-                    onClick: ()=>addToFavorites(),
+                    onClick: ()=>setAddMovieID(movie.MovieID),
                     children: "Add"
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 75,
+                    lineNumber: 101,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 66,
+                lineNumber: 95,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true);
 };
+_s(MovieCard, "sSDa7750AGY//8trueq2Ults7HI=");
 _c = MovieCard;
 MovieCard.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
@@ -27599,7 +27627,7 @@ $RefreshReg$(_c, "MovieCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap":"3AD9A","react-router-dom":"fdOAw","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./movie-card.scss":"d6HH4","@parcel/transformer-js/src/esmodule-helpers.js":"aRELh","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ZIFf"}],"7wKI2":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","prop-types":"7wKI2","react":"21dqq","react-bootstrap":"3AD9A","react-router-dom":"fdOAw","@parcel/transformer-js/src/esmodule-helpers.js":"aRELh","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"6ZIFf","react-bootstrap/Row":"cMC39","react-bootstrap/Col":"2L2I6","./movie-card.scss":"d6HH4"}],"7wKI2":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -36430,7 +36458,7 @@ function _renderMatches(matches, parentMatches) {
     return _renderMatches(matches);
 }
 
-},{"history":"iE5Zp","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"aRELh"}],"d6HH4":[function() {},{}],"6ZIFf":[function(require,module,exports) {
+},{"history":"iE5Zp","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"aRELh"}],"6ZIFf":[function(require,module,exports) {
 "use strict";
 var Refresh = require("4ce5e7bd19360a24");
 function debounce(func, delay) {
@@ -36568,7 +36596,7 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"4ce5e7bd19360a24":"7LnTi"}],"ggaUx":[function(require,module,exports) {
+},{"4ce5e7bd19360a24":"7LnTi"}],"d6HH4":[function() {},{}],"ggaUx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
