@@ -27502,6 +27502,28 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
             console.error(error);
         });
     };
+    const removeFromFavorites = ()=>{
+        fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie._id)}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (!response.ok) throw new Error("Failed to remove movie from favorites.");
+            alert("Movie removed from favorites successfully!");
+            // Update storedUser from localStorage
+            const storedUser = JSON.parse(localStorage.getItem("user"));
+            storedUser.FavoriteMovies = storedUser.FavoriteMovies.filter((id)=>id !== movie._id);
+            localStorage.setItem("user", JSON.stringify(storedUser));
+            // Update setUser with updated FavoriteMovies array
+            setUser((prevUser)=>({
+                    ...prevUser,
+                    FavoriteMovies: prevUser.FavoriteMovies.filter((id)=>id !== movie._id)
+                }));
+        }).catch((error)=>{
+            console.error(error);
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27516,7 +27538,7 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                             className: "object-fit-cover"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 55,
+                            lineNumber: 89,
                             columnNumber: 11
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27525,31 +27547,31 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                                     children: movie.title
                                 }, void 0, false, {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 61,
+                                    lineNumber: 95,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                                     children: movie.genre
                                 }, void 0, false, {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 62,
+                                    lineNumber: 96,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 60,
+                            lineNumber: 94,
                             columnNumber: 11
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 54,
+                    lineNumber: 88,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 50,
+                lineNumber: 84,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
@@ -27559,7 +27581,7 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                     children: "Remove"
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 68,
+                    lineNumber: 102,
                     columnNumber: 11
                 }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                     variant: "primary",
@@ -27567,12 +27589,12 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                     children: "Add"
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 75,
+                    lineNumber: 109,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 66,
+                lineNumber: 100,
                 columnNumber: 7
             }, undefined)
         ]

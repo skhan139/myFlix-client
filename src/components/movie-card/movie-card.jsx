@@ -45,6 +45,40 @@ export const MovieCard = ({ movie, isFavorite, token, user, setUser }) => {
       });
   };
 
+  const removeFromFavorites = () => {
+    fetch(
+      `https://movieapicf-30767e813dee.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie._id)}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to remove movie from favorites.");
+        }
+        alert("Movie removed from favorites successfully!");
+        
+        // Update storedUser from localStorage
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        storedUser.FavoriteMovies = storedUser.FavoriteMovies.filter(
+          (id) => id !== movie._id
+        );
+        localStorage.setItem("user", JSON.stringify(storedUser));
+
+        // Update setUser with updated FavoriteMovies array
+        setUser((prevUser) => ({
+          ...prevUser,
+          FavoriteMovies: prevUser.FavoriteMovies.filter((id) => id !== movie._id),
+        }));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <>
       <Link
