@@ -5,11 +5,18 @@ import { useParams } from "react-router";
 import Col from 'react-bootstrap/Col';
 
 
- export const MovieView = ({ movies }) => {
+ export const MovieView = ({ movies, onBackClick }) => {
    const { movieId } = useParams();
+
+   const handleBackClick = () => {
+    // Add logic here to go back
+    // For example: 
+    history.push("/");
+  };
 
    const movie = movies.find((m) => m.id === movieId);
   return (
+    
     <div className="one-movie--main">
       <Row className="justify-content-center">
         <Col md={8}>
@@ -40,8 +47,10 @@ import Col from 'react-bootstrap/Col';
                 <span>{movie.Director.Name}</span>
               </div>
               <Link to={`/`}>
-         <button className="back-button">Back</button>
-       </Link>
+              <button className="back-button" onClick={onBackClick}>
+                   Back
+              </button>
+              </Link>
             </Col>
           </Row>
         </Col>
