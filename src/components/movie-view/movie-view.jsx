@@ -9,8 +9,7 @@ import Col from 'react-bootstrap/Col';
    const { movieId } = useParams();
 
    const handleBackClick = () => {
-    // Add logic here to go back
-    // For example: 
+    
     history.push("/");
   };
 
