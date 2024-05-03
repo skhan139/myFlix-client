@@ -27476,7 +27476,7 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
     console.log(user.FavoriteMovies.includes(movie._id));
     console.log(user);
     const addToFavorites = ()=>{
-        fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.username}/movies/${encodeURIComponent(movie._id)}`, {
+        fetch(`https://movieapicf-30767e813dee.herokuapp.com/users/${user.Username}/movies/${encodeURIComponent(movie._id)}`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -27577,7 +27577,7 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
                 children: isFavorite ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
                     variant: "primary",
-                    onClick: ()=>setDelMovieID(movie.MovieID),
+                    onClick: ()=>removeFromFavorites(),
                     children: "Remove"
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
@@ -27589,7 +27589,7 @@ const MovieCard = ({ movie, isFavorite, token, user, setUser })=>{
                     children: "Add"
                 }, void 0, false, {
                     fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 109,
+                    lineNumber: 106,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {

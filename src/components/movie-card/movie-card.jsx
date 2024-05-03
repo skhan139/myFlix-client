@@ -12,7 +12,7 @@ export const MovieCard = ({ movie, isFavorite, token, user, setUser }) => {
   const addToFavorites = () => {
     fetch(
       `https://movieapicf-30767e813dee.herokuapp.com/users/${
-        user.username
+        user.Username
       }/movies/${encodeURIComponent(movie._id)}`,
       {
         method: "POST",
@@ -99,10 +99,7 @@ export const MovieCard = ({ movie, isFavorite, token, user, setUser }) => {
       </Link>
       <Card>
         {isFavorite ? (
-          <Button
-            variant="primary"
-            onClick={() => setDelMovieID(movie.MovieID)}
-          >
+          <Button variant="primary" onClick={() => removeFromFavorites()}>
             Remove
           </Button>
         ) : (
