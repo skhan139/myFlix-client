@@ -81,8 +81,8 @@ export const MovieCard = ({ movie, isFavorite, token, user, setUser }) => {
 
   return (
     <>
-      <Link
-        to={`/movies/${encodeURIComponent(movie.MovieID)}`}
+            <Link
+        to={`/movies/${encodeURIComponent(movie._id)}`}
         className="movie-view"
       >
         <Card className="h-100">

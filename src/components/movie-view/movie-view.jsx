@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col';
     history.push("/");
   };
 
-   const movie = movies.find((m) => m.id === movieId);
+  const movie = movies.find((m) => m._id === movieId);
   return (
     
     <div className="one-movie--main">
