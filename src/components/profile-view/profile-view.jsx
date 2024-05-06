@@ -13,8 +13,10 @@ export const ProfileView = ({localUser, movies, token}) => {
     const [email, setEmail] = useState(storedUser.email);
     const [password, setPassword]= useState(storedUser.password);
     const [birthDate, setBirthdate] = useState(storedUser.birthDate);
-    const [user, setUser]= useState();
-    const favoriteMovies = user === undefined ? [] : movies.filter(m => user.favoriteMovies.includes(m.title))
+    const [user, setUser] = useState(storedUser || {});
+    const favoriteMovies = user && user.favoriteMovies
+    ? movies.filter((m) => user.favoriteMovies.includes(m.title))
+    : [];
 
     const formData = {
       Username: username,
@@ -86,37 +88,33 @@ export const ProfileView = ({localUser, movies, token}) => {
       });
     };
 
-  useEffect(() => {
+    useEffect(() => {
       if (!token) {
-        return;
+          return;
       }
   
       fetch("https://movieapicf-30767e813dee.herokuapp.com/users", {
-        headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` }
       })
       .then((response) => response.json())
       .then((data) => {
           console.log("Users data: ", data);
-          const usersFromApi = data.map((resultUser) => {
-          return {
-            id: resultUser._id,
-            username: resultUser.username,
-            password: resultUser.password,
-            email: resultUser.email,
-            birthDate: resultUser.birthDate,
-            favoriteMovies: resultUser.favoriteMovies
-          };
-        });
-        setUser(usersFromApi.find((u) => u.username === localUser.username));
-      //   localStorage.setItem('user', JSON.stringify(user));
-        console.log("Profile Saved User: " + JSON.stringify(user));
-      //   console.log("User Result Data: " + storedUser.username );
-      //   storedUser = user;
+          const usersFromApi = data.map((resultUser) => ({
+              id: resultUser._id,
+              username: resultUser.username,
+              password: resultUser.password,
+              email: resultUser.email,
+              birthDate: resultUser.birthDate,
+              favoriteMovies: resultUser.favoriteMovies || [] // Ensure favoriteMovies is not undefined
+          }));
+          const currentUser = usersFromApi.find((u) => u.username === localUser.username);
+          setUser(currentUser);
       })
       .catch((error) => {
           console.error(error);
-        });
-  }, [token]);
+      });
+  }, [token, localUser.username]);
+  
 
 return (
   <Container className="mx-1">
@@ -125,9 +123,13 @@ return (
           <Card.Body>
               <Card.Title>My Profile  </Card.Title>
                   <Card.Text>
-                      {
-                          user && (<UserInfo name ={user.username} email={user.email} />)
-                      }
+                  {user && (
+    <UserInfo name={user.username} email={user.email} />
+)}
+
+{favoriteMovies.length > 0 && (
+    <FavouriteMovies user={user} favoriteMovies={favoriteMovies} />
+)}
                   </Card.Text>              
           </Card.Body>            
       </Card>
