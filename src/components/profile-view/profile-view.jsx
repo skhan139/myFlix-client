@@ -26,7 +26,7 @@ export const ProfileView = ({localUser, movies, token}) => {
       };
       const handleSubmit = (event) => {
         event.preventDefault(event);
-        fetch (`https://movieapicf-30767e813dee.herokuapp.com//users/${id}`, {
+        fetch (`https://movieapicf-30767e813dee.herokuapp.com/users/${user.username}`, {
           method: "PUT",
           body:JSON.stringify(formData),
           headers: {
@@ -90,30 +90,32 @@ export const ProfileView = ({localUser, movies, token}) => {
 
     useEffect(() => {
       if (!token) {
-          return;
+        return;
       }
   
       fetch("https://movieapicf-30767e813dee.herokuapp.com/users", {
-          headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       })
-      .then((response) => response.json())
-      .then((data) => {
+        .then((response) => response.json())
+        .then((data) => {
           console.log("Users data: ", data);
           const usersFromApi = data.map((resultUser) => ({
-              id: resultUser._id,
-              username: resultUser.username,
-              password: resultUser.password,
-              email: resultUser.email,
-              birthDate: resultUser.birthDate,
-              favoriteMovies: resultUser.favoriteMovies || [] // Ensure favoriteMovies is not undefined
+            id: resultUser._id,
+            username: resultUser.Username,
+            password: resultUser.Password,
+            email: resultUser.Email,
+            birthDate: resultUser.BirthDay,
+            favoriteMovies: resultUser.FavoriteMovies || [], // Ensure favoriteMovies is not undefined
           }));
-          const currentUser = usersFromApi.find((u) => u.username === localUser.username);
+          const currentUser = usersFromApi.find(
+            (u) => u.username === localUser.Username
+          );
           setUser(currentUser);
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.error(error);
-      });
-  }, [token, localUser.username]);
+        });
+    }, [token, localUser.username]);
   
 
 return (

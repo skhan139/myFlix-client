@@ -4,8 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
 export const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount }) => {
-  // Extract birthDate safely to prevent errors
-  const birthDateValue = formData.birthDate ? formData.birthDate.slice(0, 10) : '';
+  
 
   return (
     <Row>
@@ -17,6 +16,12 @@ export const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteA
             type="text"
             minLength={4}
             value={formData.username}
+            onChange={(e) => handleUpdate(e)}
+            required
+          />
+           <Form.Control
+            type="date"
+            value={formData.birthDate} 
             onChange={(e) => handleUpdate(e)}
             required
           />
