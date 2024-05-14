@@ -19,12 +19,7 @@ export const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteA
             onChange={(e) => handleUpdate(e)}
             required
           />
-           <Form.Control
-            type="date"
-            value={formData.birthDate} 
-            onChange={(e) => handleUpdate(e)}
-            required
-          />
+          
         </Form.Group>
         <Form.Group className='mb-2'>
           <Form.Label>Password:</Form.Label>
