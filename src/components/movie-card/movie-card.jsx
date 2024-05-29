@@ -7,8 +7,6 @@ import Col from "react-bootstrap/Col";
 import "./movie-card.scss";
 import React from "react";
 export const MovieCard = ({ movie, isFavorite, token, user, setUser }) => {
-  console.log(user.FavoriteMovies.includes(movie._id));
-  console.log(user);
   const addToFavorites = () => {
     fetch(
       `https://movieapicf-30767e813dee.herokuapp.com/users/${

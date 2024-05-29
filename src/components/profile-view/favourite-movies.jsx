@@ -16,9 +16,10 @@ import React from 'react'
              <Col  className="mb-5" key={movie.id} md={4}>
                <Link to={`/movies/${movie.MovieID}`} />
                <MovieCard
-                 movie={movie}
-                 isFavorite={user.favoriteMovies.includes(movie._id)}
-               />
+                movie={movie}
+                isFavorite={user.favoriteMovies.includes(movie._id)}
+                user={user}
+              />
              </Col>
            );
          })}
