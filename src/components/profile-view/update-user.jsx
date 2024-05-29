@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-export const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount }) => {
+export const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteAccount, birthDateValue }) => {
   
 
   return (
@@ -45,7 +45,7 @@ export const UpdateUser = ({ formData, handleUpdate, handleSubmit, handleDeleteA
           <Form.Label>Birthdate:</Form.Label>
           <Form.Control
             type="date"
-            value={birthDateValue} // Use birthDateValue here
+            value={birthDateValue} 
             onChange={(e) => handleUpdate(e)}
             required
           />

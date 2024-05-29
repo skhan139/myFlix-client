@@ -17,7 +17,7 @@ import React from 'react'
                <Link to={`/movies/${movie.MovieID}`} />
                <MovieCard
                  movie={movie}
-                 isFavorite={user.favoriteMovies.includes(movie.MovieID)}
+                 isFavorite={user.favoriteMovies.includes(movie._id)}
                />
              </Col>
            );
