@@ -1,4 +1,5 @@
 myFlix Client Application
+
 The myFlix Client is a React-based application designed for movie enthusiasts. It interacts with the myFlix movie API, a server-side REST API with an underlying database. This client application leverages the MERN tech stack to deliver a comprehensive movie browsing experience.
 
 Features
