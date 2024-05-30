@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
- import { MovieCard } from "../movie-card/movie-card";
- import { MovieView } from "../movie-view/movie-view";
- import { LoginView } from "../login-view/login-view";
- import { SignupView } from "../signup-view/signup-view";
- import  Row from "react-bootstrap/Row";
- import Col from 'react-bootstrap/Col';
- import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
- import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
+import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
+import Row from "react-bootstrap/Row";
+import Col from 'react-bootstrap/Col';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
- export const MainView = () => {
-   const storedUser = JSON.parse(localStorage.getItem("user"));
-   const storedToken = localStorage.getItem("token");
-   const [movies, setMovies] = useState([]);
-   const [user, setUser] = useState(storedUser ? storedUser : null);
-   const [token, setToken] = useState(storedToken ? storedToken : null);
+import Form from 'react-bootstrap/Form';
 
-   useEffect(() => {
-     if (!token) {
+export const MainView = () => {
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
+  const [movies, setMovies] = useState([]);
+  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    if (!token) {
       return;
     }
     fetch("https://movieapicf-30767e813dee.herokuapp.com/movies", {
@@ -30,7 +33,7 @@ import { ProfileView } from "../profile-view/profile-view";
             _id: movie._id,
             Title: movie.Title,
             Description: movie.Description,
-            Actors: movie.Actors, // Ensure consistency in property names
+            Actors: movie.Actors,
             image: movie.image,
             url: movie.url,
             featured: movie.featured,
@@ -39,19 +42,30 @@ import { ProfileView } from "../profile-view/profile-view";
             },
             Director: {
               Name: movie.Director.Name,
-             },
-           };
-         });
-
-
-          setMovies(moviesFromApi);
+            },
+          };
         });
-       }, [token]);
+        setMovies(moviesFromApi);
+      });
+  }, [token]);
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
-   return (
-     <BrowserRouter>
-       <NavigationBar
+  const filteredMovies = movies.filter((movie) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      movie.Title.toLowerCase().includes(query) ||
+      movie.Description.toLowerCase().includes(query) ||
+      movie.Director.Name.toLowerCase().includes(query) ||
+      movie.Genre.Name.toLowerCase().includes(query)
+    );
+  });
+
+  return (
+    <BrowserRouter>
+      <NavigationBar
         user={user}
         onLoggedOut={() => {
           setUser(null);
@@ -80,13 +94,13 @@ import { ProfileView } from "../profile-view/profile-view";
             element={
               <>
                 {user ? (
-                   <Navigate to="/" />
-                 ) : (
-                   <Col md={5}>
-                     <LoginView onLoggedIn={(user) => setUser(user)} />
-                   </Col>
-                 )}
-               </>
+                  <Navigate to="/" />
+                ) : (
+                  <Col md={5}>
+                    <LoginView onLoggedIn={(user) => setUser(user)} />
+                  </Col>
+                )}
+              </>
             }
           />
           <Route
@@ -115,9 +129,16 @@ import { ProfileView } from "../profile-view/profile-view";
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col className="mb-5" key={movie.id} md={3} sm={12}>
-                         <MovieCard
+                    <Form.Control
+                      type="text"
+                      placeholder="Search movies"
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                      className="mb-4"
+                    />
+                    {filteredMovies.map((movie) => (
+                      <Col className="mb-5" key={movie._id} md={3} sm={12}>
+                        <MovieCard
                           setUser={setUser}
                           token={token}
                           user={user}
@@ -150,7 +171,7 @@ import { ProfileView } from "../profile-view/profile-view";
             }
           />
         </Routes>
-       </Row>
-     </BrowserRouter>
-   );
- }
+      </Row>
+    </BrowserRouter>
+  );
+};
